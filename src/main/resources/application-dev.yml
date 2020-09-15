@@ -1,0 +1,2 @@
+elasticsearch:
+  connection.url: localhost:9200
