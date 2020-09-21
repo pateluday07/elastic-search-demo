@@ -1,0 +1,39 @@
+version: '3'
+services:
+  spring-boot:
+    image: uday07/elastic-search-demo
+    container_name: springboot-app-for-elasticsearch
+    ports:
+      - "8081:8080"
+    depends_on:
+      - es01
+    networks:
+      - elsticsearch-network
+    restart: on-failure
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
+    container_name: elasticsearch-for-springboot-app
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+      - cluster.name=elasticsearch
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+       soft: -1
+       hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9300:9300
+      - 9200:9200
+    networks:
+      - elsticsearch-network
+
+volumes:
+  esdata1:
+    driver: local
+
+networks:
+  elsticsearch-network:
