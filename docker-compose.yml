@@ -4,7 +4,9 @@ services:
     image: uday07/elastic-search-demo
     container_name: springboot-app-for-elasticsearch
     ports:
-      - "8081:8080"
+      - "8081:8081"
+    environment:
+      - ELASTICSEARCH_CONNECTION_URL=elasticsearch-for-springboot-app:9200
     depends_on:
       - es01
     networks:

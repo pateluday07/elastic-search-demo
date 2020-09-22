@@ -1,2 +1,5 @@
 elasticsearch:
-  connection.url: localhost:9200
+  connection.url: ${ELASTICSEARCH_CONNECTION_URL:localhost:9200}
+
+server:
+  port: 8081
