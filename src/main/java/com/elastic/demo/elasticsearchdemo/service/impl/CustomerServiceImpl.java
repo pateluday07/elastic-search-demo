@@ -77,6 +77,11 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteAll();
     }
 
+    @Override
+    public boolean isCustomerAvailable(String id) {
+        return customerRepository.existsById(id);
+    }
+
     private void validateCustomerBeforeUpdate(CustomerDto customerDto) {
         if (StringUtils.isBlank(customerDto.getId()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please Enter Id To Update Customer");
@@ -84,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private void checkCustomerAvailableForTheGivenId(String id) {
-        if (!customerRepository.existsById(id))
+        if (!isCustomerAvailable(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, CUSTOMER_NOT_FOUND_MSG.concat(id));
     }
 
