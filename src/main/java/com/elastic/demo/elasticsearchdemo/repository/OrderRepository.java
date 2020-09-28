@@ -11,5 +11,5 @@ public interface OrderRepository extends ElasticsearchRepository<Order, String> 
 
     List<Order> findByCustomerId(String customerId);
 
-    boolean deleteByCustomerId(String customerId);
+    void deleteByCustomerId(String customerId);
 }

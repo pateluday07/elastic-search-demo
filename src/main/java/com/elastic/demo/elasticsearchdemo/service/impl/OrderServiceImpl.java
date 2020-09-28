@@ -25,9 +25,9 @@ import static com.elastic.demo.elasticsearchdemo.constant.ExceptionMessageConsta
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private OrderRepository orderRepository;
-    private OrderMapper orderMapper;
-    private CustomerService customerService;
+    private final OrderRepository orderRepository;
+    private final OrderMapper orderMapper;
+    private final CustomerService customerService;
 
     @Override
     public OrderDto save(OrderDto orderDto) {
@@ -90,11 +90,7 @@ public class OrderServiceImpl implements OrderService {
     public void deleteByCustomerId(String customerId) {
         log.info("Delete Orders By Customer Id {}", customerId);
         checkCustomerAvailableOrNot(customerId);
-        if (!orderRepository.deleteByCustomerId(customerId))
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Sorry Something Went Wrong, We Are"
-                    .concat("Unable To Delete Order By Customer Id ")
-                    .concat(customerId)
-                    .concat(" Please Try Again After Sometime"));
+        orderRepository.deleteByCustomerId(customerId);
     }
 
     private void validateOrderBeforeSave(OrderDto orderDto) {
