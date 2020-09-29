@@ -4,6 +4,7 @@ import com.elastic.demo.elasticsearchdemo.dto.CustomerDto;
 import com.elastic.demo.elasticsearchdemo.entity.Customer;
 import com.elastic.demo.elasticsearchdemo.mapper.CustomerMapper;
 import com.elastic.demo.elasticsearchdemo.repository.CustomerRepository;
+import com.elastic.demo.elasticsearchdemo.repository.OrderRepository;
 import com.elastic.demo.elasticsearchdemo.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final OrderRepository orderRepository;
 
     @Override
     public CustomerDto save(CustomerDto customerDto) {
@@ -69,12 +71,14 @@ public class CustomerServiceImpl implements CustomerService {
         log.info("Deleting Customer For The Id {}", id);
         checkCustomerAvailableForTheGivenId(id);
         customerRepository.deleteById(id);
+        orderRepository.deleteByCustomerId(id);
     }
 
     @Override
     public void deleteAll() {
         log.info("Delete All Customers");
         customerRepository.deleteAll();
+        orderRepository.deleteAll();
     }
 
     @Override

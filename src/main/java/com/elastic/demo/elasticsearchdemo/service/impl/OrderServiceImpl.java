@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteByCustomerId(String customerId) {
-        log.info("Delete Orders By Customer Id {}", customerId);
+        log.info("Delete Order By Customer Id {}", customerId);
         checkCustomerAvailableOrNot(customerId);
         orderRepository.deleteByCustomerId(customerId);
     }
