@@ -17,4 +17,6 @@ public interface CustomerService {
     void deleteById(String id);
 
     void deleteAll();
+
+    boolean isCustomerAvailable(String id);
 }
