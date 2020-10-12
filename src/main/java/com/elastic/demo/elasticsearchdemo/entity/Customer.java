@@ -16,5 +16,7 @@ public class Customer {
     private String id;
     private String firstName;
     private String lastName;
+    private Boolean isMarried;
+    private int age;
 
 }

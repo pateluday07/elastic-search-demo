@@ -2,19 +2,34 @@ version: '3'
 services:
   spring-boot:
     image: uday07/elastic-search-demo
-    container_name: springboot-app-for-elasticsearch
+    container_name: springboot-app-for-elastic-search-demo
     ports:
       - "8081:8081"
     environment:
-      - ELASTICSEARCH_CONNECTION_URL=elasticsearch-for-springboot-app:9200
+      - ELASTICSEARCH_CONNECTION_URL=elasticsearch-for-elastic-search-demo:9200
     depends_on:
-      - es01
+      - elasticsearch
     networks:
       - elsticsearch-network
     restart: on-failure
-  es01:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.8.12
+    container_name: kibana-for-elastic-search-demo
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch:elasticsearch
+    depends_on:
+      - elasticsearch
+    networks:
+      - elsticsearch-network
+    restart: on-failure
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
-    container_name: elasticsearch-for-springboot-app
+    container_name: elasticsearch-for-elastic-search-demo
+    ports:
+      - 9300:9300
+      - 9200:9200
     environment:
       - node.name=elasticsearch
       - discovery.type=single-node
@@ -26,15 +41,13 @@ services:
        soft: -1
        hard: -1
     volumes:
-      - esdata1:/usr/share/elasticsearch/data
-    ports:
-      - 9300:9300
-      - 9200:9200
+      - elasticsearch-data:/usr/share/elasticsearch/data
     networks:
       - elsticsearch-network
+    restart: on-failure
 
 volumes:
-  esdata1:
+  elasticsearch-data:
     driver: local
 
 networks:
