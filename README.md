@@ -30,11 +30,11 @@ information on how to access these APIs in the following section.
 6. Go to the `elastic-search-demo/` directory and open  the 
 terminal and simply run the following command to run the app
    
-   **In Windows** 
+   **In Windows:** 
        
        gradlew bootrun
   
-   **In Linux**
+   **In Linux:**
    
        bash gradlew bootrun
   
