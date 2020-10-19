@@ -39,5 +39,25 @@ terminal and simply run the following command to run the app
        bash gradlew bootrun
   
 And we are done, now you can open the swagger to access the APIs: 
-[Swagger] (http://localhost:8081/swagger-ui/)
+[Swagger](http://localhost:8081/swagger-ui/)
 
+### Docker
+In case if you have docker in your machine then just go inside 
+the **elastic-search-demo** directory and execute the 
+following command:
+
+    docker-compose up
+    
+And done.
+
+Now you can open the swagger to access the APIs: 
+[Swagger](http://localhost:8081/swagger-ui/)
+
+You can access the: 
+[Elasticsearch](http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty)
+
+Even you can try your hands on: [Kibana](http://localhost:5601/)
+
+<p align="center">
+  <b>Thank You :)</b>
+</p>
